@@ -1,0 +1,12 @@
+1) Find non-routable packets (packets who's destination is not local server, but 
+the packet was not forwarded).
+
+2) Find packets who's destination MAC address is not one of the server's MAC address.
+
+3) Find the distribution of the protocols (layer 3 protocols)
+
+4) Find the distribution of TCP applications
+
+5) Find the distribution of UDP applications
+
+6) Find all untagged protocols (non VLAN tagged protocols)

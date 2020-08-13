@@ -1,0 +1,69 @@
+\documentclass[conference,10pt,letter]{IEEEtran}
+
+\usepackage{url}
+\usepackage{amssymb,amsthm}
+\usepackage{graphicx,color}
+
+\usepackage{float}
+
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{color, colortbl}
+\usepackage{times}
+\usepackage{caption}
+\usepackage{rotating}
+\usepackage{subcaption}
+
+\usepackage{balance}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{example}{Example}
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+
+\newcommand{\XXXnote}[1]{{\bf\color{red} XXX: #1}}
+\newcommand{\YYYnote}[1]{{\bf\color{red} YYY: #1}}
+\newcommand*{\etal}{{\it et al.}}
+
+\newcommand{\eat}[1]{}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\im}{\item}
+\newcommand{\eg}{{\it e.g.}\xspace}
+\newcommand{\ie}{{\it i.e.}\xspace}
+\newcommand{\etc}{{\it etc.}\xspace}
+%\newcommand{\em}[1]{\it}
+
+\def\P{\mathop{\mathsf{P}}}
+\def\E{\mathop{\mathsf{E}}}
+
+\begin{document}
+\sloppy
+\title{Enterprise inter-VLAN traffic analysis}
+\maketitle
+\begin{abstract}
+  In this short paper we analyze the traffic captured in the
+enterprise network. For the convenience we have chosen
+VLAN router as our vantage point due to the simplicity of
+traffic capturing process. Such choice of a vantage point
+prevented us from installing multiple sniffers in the network,
+but since our goal was to investigate the interactions of the
+computers in different VLANs such setup was natural.
+
+With this respect in the proceeding paragraphs we
+show the results of our quantitative study and discuss
+key findings.
+\end{abstract}
+
+\input intro.tex 
+\input methodology.tex
+\input results.tex
+\input conclusions.tex
+
+\balance
+\bibliographystyle{abbrv}
+\bibliography{mybib}
+
+\end{document}
