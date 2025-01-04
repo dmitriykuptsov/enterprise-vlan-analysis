@@ -27,12 +27,12 @@ distribution switch and VLAN router. Essentially, the switches were merely conne
 to one distribution switch, and the distribution switch was connected to a single router over a gigabit Ethernet trunk link. 
 
 The entire network was partitioned into $25$ broadcast domains (VLANs), with native VLAN (VLAN that does not have tagging) being reserved 
-for infrastructure management, although not all the switches were using native VLAN for management purposes. For bravity we omit discussion
-about addressing in full detail, but rather mention that all VLANs were assinged addresses from class C private network from 
-192.168.0.0 to 192.168.24.0, where as the last usable address in each subnetwork was used as the address for the default gateway. 
+for infrastructure management, although not all the switches were using native VLAN for management purposes. For brevity and privacy reasons 
+we omit the discussion of network addressing in full detail, but rather mention that all VLANs were assinged addresses from class C private network from 
+192.168.0.0 to 192.168.24.0, whereas the last usable address in each subnetwork was used as the address for the default gateway. 
 All hosts in the network used static address assignment schema.
 
-To capture the traffic it was natural to put the sniffer at 
+To capture the traffic it was natural to place packet capturing at 
 the central router, rather than installing it on multiple 
 switches. With this respect, we configured sniffer at the 
 router to capture the frames on a gigabit trunk interface.

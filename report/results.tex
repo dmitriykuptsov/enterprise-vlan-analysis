@@ -109,19 +109,18 @@ the  distribution of packet types seen in the native VLAN.
          443       & 10128            &  HTTPS            &        137     &      6589       & NetBIOS                 \\
           88       & 9700             &  Kerboros         &       389      &      1350       & LDAP                    \\
           80       & 6938             &  HTTP             &     15000      &      804        & Kaspersky Network Agent \\
-          445      & 5581             &  Microsoft-ds     &        88      &      166        & Kerboros                \\
-          135      & 940              &  Location service &       123      &      146        & NTP                     \\
+          445      & 5581             &  Microsoft SMB    &        88      &      166        & Kerboros                \\
+          135      & 940              &  MS RPC           &       123      &      146        & NTP                     \\
           389      & 880              &  LDAP             &      13000     &      50         & Kaspersky               \\
-          49155    & 694              &  Microsoft-dc     &      138       &      21         & NetBIOS                 \\
-          139      & 682              &  Netbios-snn      &      443       &      16         & QUIC                    \\
+          49155    & 694              &  Microsoft-DC     &      138       &      21         & NetBIOS                 \\
+          139      & 682              &  Netbios          &      443       &      16         & QUIC                    \\
     \hline
   \end{tabular}
 \end{table*}
 
 Instead, next we turned our attention to frames with invalid MAC addresses. 
 By invalid MAC address we mean those MAC addresses which are not multicast or 
-broadcast addresses received at the trunk interface of the router. As well
-as unicast frames received by the router at the trunk interface with 
+broadcast addresses received at the trunk interface of the router with 
 destination unicast MAC addresses not of router's own MAC addresses. 
 Upon filtering the data we have found that there were two such 
 destination unicast MAC addresses. We hypothesize that such frames could have been
@@ -147,7 +146,7 @@ UDP streams, and other transport protocols. To perform this filtering step,
 we merely found all packets whose source and destination addresses where within 
 the subnetwork {\em 192.168.0.0/16} and filtered out frames for which 
 source MAC address was not equal to the MAC address of the VLAN server
-(note, all VLAN interface were assigned the same MAC address). 
+(note, all VLAN interfaces were assigned the same MAC address). 
 Thus, effectively leaving only one copy of the packet being forwarded 
 between the subnetworks in the trace. Our resulting trace was reduced by
 $35.4 \%$, and now contained $12190001$ frames.
@@ -173,7 +172,7 @@ frames, and manufacture's name. Obviously, such disripancy is strange.
 }
 
 For the cleaned data, our first step was to take a look at the distribution of TCP and UDP applications and the number of bytes these 
-applications transmitted. Thus, in Table~\ref{tab:apps} we show the distribution of $9$ most used UDP and TCP applications. We examed 
+applications transmitted. Thus, in Table~\ref{tab:apps} we show the distribution of $9$ most used UDP and TCP applications. We examened 
 both inter-VLAN and Internet traffic. We observed that while most of hosts were not actively connected to the Internet, using the VPN 
 connections, $15366$ connection attemps were made towards the Internet (only TCP SYN packet was captured, which was dropped by the 
 firewall). This could be an indication that quite a lot of connections are made in fact in a stealth mode on users' computers. Next, we 
@@ -182,10 +181,16 @@ least one TCP/UDP connection between the pair of computers existed). \eat{In Fig
 interaction for TCP connections only.} As it was expected, only few computers (servers) were accepting all TCP connection, with a small 
 fraction of computers were interacting between each other. Upon expecting closely the logs we have found few interesting things: (i) at 
 least one machine had misconfigured address (it was using self generated IP addresses with the prefix $169.254.171.0/24$); (ii) 
-only two machines were interacting with non-server computers $192.168.23.13$ and $192.168.3.6$ using ports $139$ (NetBIOS) and $445$ 
-(Microsoft-DS).
+only two machines were interacting with non-server computers $192.168.23.13$ and $192.168.3.6$ using ports $139$ and $445$.
 
-Next we computed the distribution of the packet sizes for packets with valid IP addresses. {\eat In Figure~\ref{fig:frame_sizes} 
-we demonstrate such distribution. Interestingly there were frames which were larger than maximum allowed Ethernet frames 
-size (so called jumbo frames).} Around $10\%$ of the IPv4 packet were larger than $1500$ bytes. 
+\begin{figure}[!hbt]
+  \includegraphics[width=0.45\textwidth]{graphics/bubble_plot_distribution_of_open_ports.pdf }
+  \caption{Distribution of ports used in the network}
+  \label{fig:ports}
+\end{figure}   
+
+Next we computed the distribution of the packet sizes for packets with valid IP addresses. Interestingly there were frames which were larger than maximum allowed Ethernet frames 
+size (so called jumbo frames). Around $10\%$ of the IPv4 packet were larger than $1500$ bytes. Finally, we have build the distribution 
+of destination ports used in the packets. In Figure~\ref{fig:ports} we show this distribution.
+
 
